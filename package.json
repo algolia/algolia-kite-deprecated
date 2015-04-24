@@ -1,0 +1,35 @@
+{
+  "name": "AutoAlgoliaKit",
+  "version": "1.0.0",
+  "description": "Automagic kit for Algolia search",
+  "main": "index.js",
+  "author": "Algolia unicorn factory <hey@algolia.com>",
+  "scripts": {
+    "build": "browserify -d src/index.js -o app.js",
+    "watch": "watchify -v -d src/index.js -o app.js",
+    "serve": "static -z -a 0.0.0.0 ."
+  },
+  "browserify": {
+    "transform": [
+      [
+        "babelify"
+      ]
+    ]
+  },
+  "devDependencies": {
+    "babelify": "5.0.4",
+    "browserify": "9.0.3",
+    "node-static": "0.7.6",
+    "watchify": "2.4.0"
+  },
+  "dependencies": {
+    "algoliasearch": "3.1.x",
+    "algoliasearch-helper": "2.0.0-rc5",
+    "hogan.js": "3.0.2",
+    "lodash": "3.5.0",
+    "react": "0.13.1",
+    "remarkable": "1.6.0",
+    "tinycolor2": "1.1.2"
+  },
+  "license": "MIT"
+}

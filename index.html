@@ -1,0 +1,71 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title></title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="css/normalize.css" />
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+  <link href='http://fonts.googleapis.com/css?family=Roboto:500,100,300,400' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" href="css/material.css" />
+  <link rel="stylesheet" href="css/index.css" />
+</head>
+<body data-algolia-app-id="JTH1JDTDFT" data-algolia-key="34a4c1b994546fbec45a670a06ba0c33" data-algolia-index="irce_convention">
+  <div class="container ">
+    <div class="header col-md-12">
+      <h1>YOUR search! <span class="powered-by">Powered by Algolia</span></h1>
+    </div>
+  </div>
+  <div class="container-fluid">
+    <div class="search">
+      <div class="algolia-magic search-box"></div>
+    </div>
+  </div>
+  <div class="container">
+    <div class="algolia-magic search-stats col-md-12"></div>
+    <div class="results col-md-12">
+      <div class="row">
+        <div class="algolia-magic result-filters col-md-3">
+          <div class="algolia-magic facet conjunctive" data-facet-name="companyName"></div>
+          <div class="algolia-magic facet conjunctive" data-facet-name="companyName"></div>
+        </div>
+        <div class="col-md-9">
+          <div class="row results">
+            <div class="algolia-magic result-items col-md-12" data-hit-template="#hit-template"></div>
+            <div class="algolia-magic pagination col-md-12" data-padding="3"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script type="text/html" id="hit-template">
+<div class="col-xs-12 col-sm-6" >
+<div class="result panel panel-default" >
+  <div class="panel-body" >
+    <img width="75" height="90" class="speaker-portrait" src="{{image}}" style="float:left;background:#aaa;" >
+    <div style="margin-left:90px;max-width:100%;" >
+      <h1 class="speaker-name" >
+      <a href="http://irce.com{{speakerUrl}}" >{{{_highlightResult.speakerName.value}}}</a>
+      </h1>
+      <p class="speaker-position small" >
+        <span >{{speakerPosition}}</span>
+        <span > at </span>
+        <a href="{{companyUrl}}" >{{{_highlightResult.companyName.value}}}</a>
+      </p>
+    </div>
+    <hr style="clear:both;" >
+    <h2 class="speaker-session-title" >Sessions</h2>
+    <ul class="speaker-sessions" >
+      {{#sessions}}
+      <li>
+      <a href="http://irce.com{{url}}" >{{name}}</a>
+      </li>
+      {{/sessions}}
+    </ul>
+  </div>
+</div> 
+</div>
+  </script>
+  <script src="app.js"></script>
+</body>
+</html>
