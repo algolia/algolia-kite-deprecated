@@ -1,12 +1,21 @@
 "use strict";
 var React = require( "react" );
 
-class SearchBox extends React.Component {
-  render() {
+var AlgoliasearchHelper = require( "algoliasearch-helper/src/algoliasearch.helper" );
+var SearchResults = require( "algoliasearch-helper/src/SearchResults" );
+
+var SearchBox = React.createClass( {
+  propTypes : {
+    helper : React.PropTypes.instanceOf( AlgoliasearchHelper ),
+    results : React.PropTypes.instanceOf( SearchResults ),
+    onFocus : React.PropTypes.func,
+    placeholder : React.PropTypes.string
+  },
+  render : function() {
     var onFocus = this.props.onFocus;
     return <form className="autocomplete-form" onSubmit={ function( e ) { e.preventDefault(); } }>
              <input type="text"
-                    placeholder="Search for a speaker, a session, or a company"
+                    placeholder={ this.props.placeholder }
                     name="query"
                     className="searchbox main form-control"
                     data-role="autocomplete"
@@ -16,13 +25,13 @@ class SearchBox extends React.Component {
                     onFocus={ onFocus }
                     role="textbox" />
            </form>;
-  }
-  change( e ) {
+  },
+  change : function( e ) {
     var value = e.target.value;
     var helper = this.props.helper;
 
     helper.setQuery( value ).search();
   }
-}
+} );
 
 module.exports = SearchBox;

@@ -9,7 +9,7 @@ var HoganResult = React.createClass( {
     } );
   },
   render : function(){
-    var content = this.state.template.render( this.props.result );
+    var content = this.state.template.render( this.props.data );
     return <div dangerouslySetInnerHTML={{ __html : content }} />;
   }
 } );

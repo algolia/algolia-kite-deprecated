@@ -2,6 +2,10 @@ Algolia Magic UI Kit
 ====================
 
  - [x] Template in hits
- - [-] Pagination component
+ - [x] Pagination component
+ - [x] SearchBox placeHolder
+ - [x] Change dataset
+ - [x] Disjunctive facets
+ - [x] Slider
  - [] Configuration of the search
  - [] Refactor component definition

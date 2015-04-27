@@ -125,14 +125,15 @@ a{
 }
 
 .result{
-  height: 260px;
 }
 .speaker-name{
   font-size:2em;
   margin-top : 0;
 }
 
-.speaker-portrait{
+.product-image{
+  max-width : 75px;
+  max-height: 90px;
   margin-bottom : 15px;
 }
 
@@ -168,4 +169,29 @@ a{
 }
 :-ms-input-placeholder { /* Internet Explorer 10+ */
   color : #eee!important;
+}
+
+.horizontal-slider {
+  height: 50px;
+}
+
+.horizontal-slider .bar {
+  top: 20px;
+  height: 10px;
+  background: #ccc;
+}
+
+.horizontal-slider .handle {
+  top: 10px;
+  width: 30px;
+  height: 30px;
+  line-height: 30px;
+  background: #999;
+  color: white;
+  border-radius: 25px;
+}
+
+.statistics {
+  text-align : right;
+  margin-bottom : 1em;
 }

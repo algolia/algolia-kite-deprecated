@@ -10,24 +10,28 @@
   <link rel="stylesheet" href="css/material.css" />
   <link rel="stylesheet" href="css/index.css" />
 </head>
-<body data-algolia-app-id="JTH1JDTDFT" data-algolia-key="34a4c1b994546fbec45a670a06ba0c33" data-algolia-index="irce_convention">
-  <div class="container ">
+<body data-algolia-app-id="latency" data-algolia-key="6be0576ff61c053d5f9a3225e2a90f76" data-algolia-index="bestbuy">
+  <div class="container-fluid header">
     <div class="header col-md-12">
       <h1>YOUR search! <span class="powered-by">Powered by Algolia</span></h1>
     </div>
   </div>
-  <div class="container-fluid">
+  <div class="container-fluid search-container">
     <div class="search">
-      <div class="algolia-magic search-box"></div>
+      <div class="algolia-magic search-box" data-placeholder="Search for something awesome..."></div>
     </div>
   </div>
   <div class="container">
     <div class="algolia-magic search-stats col-md-12"></div>
+    <div class="algolia-magic col-md-12 statistics" data-template="#stats-template"></div>
     <div class="results col-md-12">
       <div class="row">
         <div class="algolia-magic result-filters col-md-3">
-          <div class="algolia-magic facet conjunctive" data-facet-name="companyName"></div>
-          <div class="algolia-magic facet conjunctive" data-facet-name="companyName"></div>
+          <div class="algolia-magic facet" data-facet-name="type"></div>
+          <div class="algolia-magic facet" data-facet-name="shipping"></div>
+          <div class="algolia-magic disjunctive-facet" data-facet-name="category"></div>
+          <div class="algolia-magic disjunctive-facet" data-facet-name="manufacturer"></div>
+          <div class="algolia-magic slider" data-facet-name="salePrice"></div>
         </div>
         <div class="col-md-9">
           <div class="row results">
@@ -38,30 +42,24 @@
       </div>
     </div>
   </div>
+  <script type="text/html" id="stats-template">
+  <div class="col-xs-12">{{nbHits}} hits retrieved in {{processingTimeMS}} ms</div>
+  </script>
   <script type="text/html" id="hit-template">
-<div class="col-xs-12 col-sm-6" >
+<div class="col-xs-12" >
 <div class="result panel panel-default" >
   <div class="panel-body" >
-    <img width="75" height="90" class="speaker-portrait" src="{{image}}" style="float:left;background:#aaa;" >
+    <img class="product-image" src="{{thumbnailImage}}" style="float:left;background:#aaa;" >
     <div style="margin-left:90px;max-width:100%;" >
       <h1 class="speaker-name" >
-      <a href="http://irce.com{{speakerUrl}}" >{{{_highlightResult.speakerName.value}}}</a>
+      <a href="{{url}}" >{{{_highlightResult.name.value}}}</a>
       </h1>
       <p class="speaker-position small" >
-        <span >{{speakerPosition}}</span>
-        <span > at </span>
-        <a href="{{companyUrl}}" >{{{_highlightResult.companyName.value}}}</a>
       </p>
     </div>
     <hr style="clear:both;" >
-    <h2 class="speaker-session-title" >Sessions</h2>
-    <ul class="speaker-sessions" >
-      {{#sessions}}
-      <li>
-      <a href="http://irce.com{{url}}" >{{name}}</a>
-      </li>
-      {{/sessions}}
-    </ul>
+    <h2 class="speaker-session-title" >Description</h2>
+    <p>{{shortDescription}}</p>
   </div>
 </div> 
 </div>
