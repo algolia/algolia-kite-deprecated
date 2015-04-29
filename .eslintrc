@@ -2,6 +2,9 @@
   "ecmaFeatures" : {
     "jsx" : true
   },
+  "plugins" : [
+    "react"
+  ],
   "rules" : {
     "semi": 2,
     "no-multi-spaces": 0,

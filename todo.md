@@ -1,5 +1,5 @@
-Algolia Magic UI Kit
-====================
+Algolia Magic Kite
+==================
 
  - [x] Template in hits
  - [x] Pagination component
@@ -7,5 +7,5 @@ Algolia Magic UI Kit
  - [x] Change dataset
  - [x] Disjunctive facets
  - [x] Slider
- - [] Configuration of the search
- - [] Refactor component definition
+ - [ ] Configuration of the search
+ - [ ] Refactor component definition

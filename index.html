@@ -18,26 +18,41 @@
   </div>
   <div class="container-fluid search-container">
     <div class="search">
-      <div class="algolia-magic search-box" data-placeholder="Search for something awesome..."></div>
+      <div class="algolia-magic search-box" data-placeholder="Search for an awesome product..."></div>
+    <!--
+    -->
     </div>
   </div>
   <div class="container">
-    <div class="algolia-magic search-stats col-md-12"></div>
     <div class="algolia-magic col-md-12 statistics" data-template="#stats-template"></div>
+  <!--
+  -->
     <div class="results col-md-12">
       <div class="row">
+        <div class="col-md-9">
+          <div class="row results">
+            <div class="algolia-magic result-items col-md-12" data-hit-template="#hit-template" data-hits-per-page="5"></div>
+            <div class="algolia-magic pagination col-md-12" data-padding="3"></div>
+          <!--
+            -->
+          </div>
+        </div>
         <div class="algolia-magic result-filters col-md-3">
           <div class="algolia-magic facet" data-facet-name="type"></div>
+          <div class="algolia-magic disjunctive-facet" data-facet-name="category"></div>
+          <div class="algolia-magic slider" data-facet-name="salePrice"></div>
+          <!--
+
+
+Facet components : type, shipping, category, manufacturer, salePrice
+Facet types : facet, disjunctive-facet, slider
+
+
           <div class="algolia-magic facet" data-facet-name="shipping"></div>
           <div class="algolia-magic disjunctive-facet" data-facet-name="category"></div>
           <div class="algolia-magic disjunctive-facet" data-facet-name="manufacturer"></div>
           <div class="algolia-magic slider" data-facet-name="salePrice"></div>
-        </div>
-        <div class="col-md-9">
-          <div class="row results">
-            <div class="algolia-magic result-items col-md-12" data-hit-template="#hit-template"></div>
-            <div class="algolia-magic pagination col-md-12" data-padding="3"></div>
-          </div>
+          -->
         </div>
       </div>
     </div>
@@ -54,8 +69,7 @@
       <h1 class="speaker-name" >
       <a href="{{url}}" >{{{_highlightResult.name.value}}}</a>
       </h1>
-      <p class="speaker-position small" >
-      </p>
+      <p>{{salePrice}}</p>
     </div>
     <hr style="clear:both;" >
     <h2 class="speaker-session-title" >Description</h2>
