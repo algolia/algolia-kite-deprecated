@@ -5,21 +5,22 @@
   "main": "index.js",
   "author": "Algolia unicorn factory <hey@algolia.com>",
   "scripts": {
-    "build:js": "browserify -d src/index.js -o dist/algoliasearch-ui-kit.js",
+    "build:js": "NODE_ENV=production browserify -d src/index.js | uglifyjs -c warnings=false -m > dist/algoliasearch-ui-kit.min.js && gzip -k -f -9 dist/algoliasearch-ui-kit.min.js",
     "watch:js": "watchify -v -d src/index.js -o dist/algoliasearch-ui-kit.js",
     "serve": "static -z -a 0.0.0.0 ."
   },
   "browserify": {
     "transform": [
-      [
-        "babelify"
-      ]
+      "babelify",
+      "envify"
     ]
   },
   "devDependencies": {
     "babelify": "5.0.4",
     "browserify": "9.0.3",
+    "envify": "3.4.0",
     "eslint-plugin-react": "2.2.0",
+    "minifyify": "6.4.0",
     "node-static": "0.7.6",
     "watchify": "2.4.0"
   },
