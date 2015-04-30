@@ -178,17 +178,21 @@ a{
 .horizontal-slider .bar {
   top: 20px;
   height: 10px;
-  background: #ccc;
+  background: #DAECFA;
+}
+
+.horizontal-slider .bar-1 {
+  background : #246396;
 }
 
 .horizontal-slider .handle {
-  top: 10px;
-  width: 30px;
-  height: 30px;
+  top: 15px;
+  width: 20px;
+  height: 20px;
   line-height: 30px;
-  background: #999;
+  background: #224C6E;
   color: white;
-  border-radius: 25px;
+  border-radius: 7px;
 }
 
 .statistics {

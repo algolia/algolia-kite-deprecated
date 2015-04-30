@@ -1,12 +1,12 @@
 {
-  "name": "AutoAlgoliaKit",
+  "name": "AlgoliasearchUIKit",
   "version": "1.0.0",
   "description": "Automagic kit for Algolia search",
   "main": "index.js",
   "author": "Algolia unicorn factory <hey@algolia.com>",
   "scripts": {
-    "build": "browserify -d src/index.js -o app.js",
-    "watch": "watchify -v -d src/index.js -o app.js",
+    "build:js": "browserify -d src/index.js -o dist/algoliasearch-ui-kit.js",
+    "watch:js": "watchify -v -d src/index.js -o dist/algoliasearch-ui-kit.js",
     "serve": "static -z -a 0.0.0.0 ."
   },
   "browserify": {
@@ -25,8 +25,7 @@
   },
   "dependencies": {
     "algoliasearch": "3.1.x",
-    "algoliasearch-helper": "2.0.0-rc5",
-    "algoliasearch-react" : "0.0.x",
+    "algoliasearch-helper": "2.0.1",
     "lodash": "3.5.0",
     "react": "0.13.1"
   },
