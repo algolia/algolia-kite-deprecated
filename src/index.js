@@ -72,23 +72,27 @@ var Hogan = require( "./components/Hogan" );
 
     forEach( containers.facets, function( f ) {
       React.render( <ConjunctiveF searchState={ s }
-                            facet={ r.getFacetByName( f.name ) }
+                            facet={ getFacetOrDefaults( r, f.name ) }
                             helper={ h } />,
                     f.node );
     } );
 
     forEach( containers.disjunctiveFacets, function( f ) {
       React.render( <DisjunctiveF searchState={ s }
-                            facet={ r.getFacetByName( f.name ) }
+                            facet={ getFacetOrDefaults( r, f.name ) }
                             helper={ h } />,
                     f.node );
     } );
 
-    forEach( containers.sliders , function( s ) {
+    forEach( containers.sliders , function( slider ) {
       React.render( <Slider searchState={ s }
-                            facet={ r.getFacetByName( s.name ) }
+                            facet={ getFacetOrDefaults( r, slider.name ) }
                             helper={ h } />,
-                    s.node );
+                    slider.node );
     } );
+  }
+
+  function getFacetOrDefaults( results, facetName ){
+    return results.getFacetByName( facetName ) || {name : facetName, data : [] };
   }
 } )();
