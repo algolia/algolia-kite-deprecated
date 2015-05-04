@@ -8,8 +8,8 @@ var AlgoliaSlider = React.createClass( {
     var helper = this.props.helper;
     var facet = this.props.facet;
     var title = <h2 className="panel-title">{ facet.name }</h2>;
-    var min = facet.stats.min || 0;
-    var max = facet.stats.max || 0;
+    var min = ( facet.stats && facet.stats.min ) || 0;
+    var max = ( facet.stats && facet.stats.max ) || 0;
     var values = [
       helper.state.getNumericRefinement( facet.name, ">=" ) || min,
       helper.state.getNumericRefinement( facet.name, "<=" ) || max
