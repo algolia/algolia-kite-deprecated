@@ -73,14 +73,16 @@ var Hogan = require( "./components/Hogan" );
     forEach( containers.facets, function( f ) {
       React.render( <ConjunctiveF searchState={ s }
                             facet={ getFacetOrDefaults( r, f.name ) }
-                            helper={ h } />,
+                            helper={ h }
+                            sort={ f.sort } />,
                     f.node );
     } );
 
     forEach( containers.disjunctiveFacets, function( f ) {
       React.render( <DisjunctiveF searchState={ s }
                             facet={ getFacetOrDefaults( r, f.name ) }
-                            helper={ h } />,
+                            helper={ h }
+                            sort={ f.sort } />,
                     f.node );
     } );
 

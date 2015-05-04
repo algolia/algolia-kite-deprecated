@@ -10,3 +10,4 @@ Algolia Magic Kite
  - [ ] Configuration of the search
  - [ ] Refactor component definition
  - [ ] Multi index selection
+ - [x] Sort on facet list

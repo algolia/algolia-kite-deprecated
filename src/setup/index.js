@@ -38,7 +38,8 @@ module.exports = {
       function domToFacet( d ) {
         return {
           node : d,
-          name : d.dataset.facetName
+          name : d.dataset.facetName,
+          sort : d.dataset.sort
         };
       } );
 
@@ -47,7 +48,8 @@ module.exports = {
       function domToFacet( d ) {
         return {
           node : d,
-          name : d.dataset.facetName
+          name : d.dataset.facetName,
+          sort : d.dataset.sort
         };
       } );
 

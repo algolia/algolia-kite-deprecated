@@ -1,26 +1,39 @@
 "use strict";
 var React = require( "react" );
 var map = require( "lodash/collection/map" );
+var order = require( "../order" );
 
 var DisjunctiveFacet = React.createClass( {
   render : function() {
     var facet = this.props.facet;
     var helper = this.props.helper;
+    var sort = this.props.sort;
 
     var title = <h2 className="panel-title">{ facet.name }</h2>;
 
-    var values = map( facet.data, function( nb, facetFilter ) {
-      var isRefined = helper.isRefined( facet.name, facetFilter );
-      var activeClass = isRefined ? " active" : "";
+    var facetValues = map( facet.data, function( nb, facetFilter ) {
+      return {
+        name : facetFilter,
+        isRefined : helper.isRefined( facet.name, facetFilter ),
+        value : nb
+      };
+    } );
+
+    if( sort && order[ sort ] ){
+      facetValues.sort( order[ sort ] );
+    }
+
+    var values = map( facetValues, function( facetValue ) {
+      var activeClass = facetValue.isRefined ? " active" : "";
       var className = "list-group-item" + activeClass;
       return <a href="#"
-                key={ facet.name + facetFilter }
+                key={ facet.name + facetValue.name }
                 className={ className }
-                onClick={ this.toggleSelect.bind( this, facet.name, facetFilter ) }>
+                onClick={ this.toggleSelect.bind( this, facet.name, facetValue.name ) }>
                <input type="checkbox"
                       onClick={ function( e ) { e.preventDefault(); } }
-                      checked={ isRefined }/>
-               { facetFilter } ({nb})
+                      checked={ facetValue.isRefined } />
+               { facetValue.name } ({ facetValue.value })
              </a>;
     }, this );
 
