@@ -2,18 +2,30 @@
 var map = require( "lodash/collection/map" );
 
 module.exports = {
-  readAlgoliaConfig : function readAlgoliaConfig() {
-    var d = document.body.dataset;
+  /**
+   * Read the algolia configuration from a given dom node.
+   * @param {DOMNode} dom node holding the configuration
+   * @return {Object} configuration for the algolia search client
+   */
+  readAlgoliaConfig : function readAlgoliaConfig( dom ) {
+    var d = dom.body.dataset;
     return {
       appID : d.algoliaAppId,
       key : d.algoliaKey,
       index : d.algoliaIndex
     };
   },
-  readContainersConfig : function lookForContainers() {
+  /**
+   * Read the current the DOM node for component configurations. Return a list
+   * of components to render. Those components should follow the same props
+   * signature : { Helper, SearchResults, SearchState }
+   * @param {DOMNode} dom the root dom node in which to look for components
+   * @return {Array<function>} preconfigured react components
+   */
+  readContainersConfig : function lookForContainers( dom ) {
     var containersConfig = {};
     containersConfig.sliders = map(
-      document.querySelectorAll( ".algolia-magic.slider" ),
+      dom.querySelectorAll( ".algolia-magic.slider" ),
       function domToSlider( d ) {
         return {
           node : d,
@@ -22,7 +34,7 @@ module.exports = {
       } );
 
     containersConfig.facets = map(
-      document.querySelectorAll( ".algolia-magic.facet" ),
+      dom.querySelectorAll( ".algolia-magic.facet" ),
       function domToFacet( d ) {
         return {
           node : d,
@@ -31,7 +43,7 @@ module.exports = {
       } );
 
     containersConfig.disjunctiveFacets = map(
-      document.querySelectorAll( ".algolia-magic.disjunctive-facet" ),
+      dom.querySelectorAll( ".algolia-magic.disjunctive-facet" ),
       function domToFacet( d ) {
         return {
           node : d,
@@ -47,7 +59,7 @@ module.exports = {
           placeholder : d.dataset.placeholder
         };
       }
-    } )( document.querySelector( ".algolia-magic.search-box" ) );
+    } )( dom.querySelector( ".algolia-magic.search-box" ) );
 
     containersConfig.results = ( function domToResult( d ) {
       if( d === null ) return undefined;
@@ -55,10 +67,10 @@ module.exports = {
         return {
           node : d,
           hitsPerPage : d.dataset.hitsPerPage || 12,
-          hitTemplate : document.querySelector( d.dataset.hitTemplate ).innerHTML
+          hitTemplate : dom.querySelector( d.dataset.hitTemplate ).innerHTML
         };
       }
-    } )( document.querySelector( ".algolia-magic.result-items" ) );
+    } )( dom.querySelector( ".algolia-magic.result-items" ) );
 
     containersConfig.pagination = ( function domToPagination( d ) {
       if( d === null ) return undefined;
@@ -68,17 +80,17 @@ module.exports = {
           padding : d.dataset.padding || 2
         };
       }
-    } )( document.querySelector( ".algolia-magic.pagination" ) );
+    } )( dom.querySelector( ".algolia-magic.pagination" ) );
 
     containersConfig.statistics = ( function domToStats( d ) {
       if( d === null ) return undefined;
       else {
         return {
           node : d,
-          template : document.querySelector( d.dataset.template ).innerHTML
+          template : dom.querySelector( d.dataset.template ).innerHTML
         };
       }
-    } )( document.querySelector( ".algolia-magic.statistics" ) );
+    } )( dom.querySelector( ".algolia-magic.statistics" ) );
 
     return containersConfig;
   }

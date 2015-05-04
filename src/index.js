@@ -17,8 +17,8 @@ var Pagination = require( "./components/Pagination" );
 var Hogan = require( "./components/Hogan" );
 
 ( function setupAll() {
-  var appConfig = setup.readAlgoliaConfig();
-  var containers = setup.readContainersConfig();
+  var appConfig = setup.readAlgoliaConfig( document );
+  var containers = setup.readContainersConfig( document );
 
   var result = {};
   var state = {};
