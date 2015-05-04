@@ -21,7 +21,7 @@ var SearchBox = React.createClass( {
                     data-role="autocomplete"
                     autoComplete="off"
                     autofocus="autofocus"
-                    onChange={ this.change.bind( this ) }
+                    onChange={ this.change }
                     onFocus={ onFocus }
                     role="textbox" />
            </form>;

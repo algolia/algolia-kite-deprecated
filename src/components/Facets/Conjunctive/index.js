@@ -12,7 +12,10 @@ var Facet = React.createClass( {
     var values = map( facet.data, function( nb, facetFilter ) {
       var activeClass = helper.isRefined( facet.name, facetFilter ) ? " active" : "";
       var className = "list-group-item" + activeClass;
-      return <a href="#" className={ className } onClick={ this.toggleSelect.bind( this, facet.name, facetFilter ) }>
+      return <a href="#"
+                className={ className }
+                key={ facet.name + facetFilter }
+                onClick={ this.toggleSelect.bind( this, facet.name, facetFilter ) }>
                { facetFilter } ({nb})
              </a>;
     }, this );

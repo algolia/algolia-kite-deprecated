@@ -13,7 +13,10 @@ var DisjunctiveFacet = React.createClass( {
       var isRefined = helper.isRefined( facet.name, facetFilter );
       var activeClass = isRefined ? " active" : "";
       var className = "list-group-item" + activeClass;
-      return <a href="#" className={ className } onClick={ this.toggleSelect.bind( this, facet.name, facetFilter ) }>
+      return <a href="#"
+                key={ facet.name + facetFilter }
+                className={ className }
+                onClick={ this.toggleSelect.bind( this, facet.name, facetFilter ) }>
                <input type="checkbox"
                       onClick={ function( e ) { e.preventDefault(); } }
                       checked={ isRefined }/>
