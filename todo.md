@@ -9,3 +9,4 @@ Algolia Magic Kite
  - [x] Slider
  - [ ] Configuration of the search
  - [ ] Refactor component definition
+ - [ ] Multi index selection
