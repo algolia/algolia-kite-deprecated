@@ -197,5 +197,11 @@ a{
 
 .statistics {
   text-align : right;
-  margin-bottom : 1em;
 }
+
+.results-header {
+  display : flex;
+  margin-bottom: 1em;
+  align-items: flex-end;
+}
+
