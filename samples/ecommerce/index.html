@@ -22,7 +22,14 @@
     </div>
   </div>
   <div class="container">
-    <div class="algolia-magic col-md-12 statistics" data-template="#stats-template"></div>
+    <div class="">
+      <div class="algolia-magic index-selector col-md-6">
+        <option data-index-name="bestbuy">Relevance</option>
+        <option data-index-name="bestbuy_price_asc">Lowest price</option>
+        <option data-index-name="bestbuy_price_desc">Highest price</option>
+      </div>
+      <div class="algolia-magic col-md-6 statistics" data-template="#stats-template"></div>
+    </div> 
     <div class="results col-md-12">
       <div class="row">
         <div class="col-md-9">
@@ -42,7 +49,7 @@
     </div>
   </div>
   <script type="text/html" id="stats-template">
-<div class="col-xs-12">{{nbHits}} hits retrieved in {{processingTimeMS}} ms</div>
+{{nbHits}} hits retrieved in {{processingTimeMS}} ms
   </script>
   <script type="text/html" id="hit-template">
 <div class="col-xs-12" >
@@ -57,7 +64,7 @@
     </div>
     <hr style="clear:both;" >
     <h2 class="speaker-session-title" >Description</h2>
-    <p>{{shortDescription}}</p>
+    <p>{{{shortDescription}}}</p>
   </div>
 </div> 
 </div>

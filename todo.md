@@ -11,3 +11,4 @@ Algolia Magic Kite
  - [ ] Refactor component definition
  - [ ] Multi index selection
  - [x] Sort on facet list
+ - [ ] History / URL

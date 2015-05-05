@@ -15,6 +15,7 @@ var Results = require( "./components/Results" );
 var SearchBox = require( "./components/SearchBox" );
 var Pagination = require( "./components/Pagination" );
 var Hogan = require( "./components/Hogan" );
+var IndexSelector = require( "./components/IndexSelector" );
 
 ( function setupAll() {
   var appConfig = setup.readAlgoliaConfig( document );
@@ -68,6 +69,13 @@ var Hogan = require( "./components/Hogan" );
       React.render( <Hogan template={ containers.statistics.template }
                            data={ r } />,
                     containers.statistics.node );
+    }
+
+    if( containers.indexSelector ){
+      React.render( <IndexSelector helper={ h } results={ r } searchState={ s }
+                                   indices={ containers.indexSelector.indices }
+                                   selectedIndex={ h.getIndex() } />,
+                    containers.indexSelector.node );
     }
 
     forEach( containers.facets, function( f ) {

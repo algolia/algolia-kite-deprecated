@@ -28,7 +28,8 @@
     "algoliasearch": "3.1.x",
     "algoliasearch-helper": "2.0.1",
     "lodash": "3.5.0",
-    "react": "0.13.1"
+    "react": "0.13.1",
+    "react-dropdown-button": "1.0.11"
   },
   "license": "MIT"
 }
