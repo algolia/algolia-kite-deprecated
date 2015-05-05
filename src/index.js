@@ -18,6 +18,7 @@ var Hogan = require( "./components/Hogan" );
 var IndexSelector = require( "./components/IndexSelector" );
 
 ( function setupAll() {
+  var firstRendering = true;
   var appConfig = setup.readAlgoliaConfig( document );
   var containers = setup.readContainersConfig( document );
 
@@ -100,6 +101,13 @@ var IndexSelector = require( "./components/IndexSelector" );
                             helper={ h } />,
                     slider.node );
     } );
+
+    if( firstRendering ){
+      forEach( document.querySelectorAll( ".algolia-magic" ), function( d ) {
+        d.classList.add( "show" );
+      } );
+      firstRendering = false;
+    }
   }
 
   function getFacetOrDefaults( results, facetName ){

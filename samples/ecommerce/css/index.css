@@ -12,6 +12,15 @@ a{
   color: #46AEDA;
 }
 
+.algolia-magic {
+  opacity : 0;
+  transition : opacity 500ms;
+}
+
+.algolia-magic.show{
+  opacity : 1;
+}
+
 .header{
   display: block;
   background: rgb( 10, 24, 35 );
