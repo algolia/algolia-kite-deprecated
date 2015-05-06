@@ -26,10 +26,12 @@
   },
   "dependencies": {
     "algoliasearch": "3.1.x",
-    "algoliasearch-helper": "2.0.1",
+    "algoliasearch-helper": "2.0.2",
+    "hogan.js": "3.0.2",
     "lodash": "3.5.0",
     "react": "0.13.1",
-    "react-dropdown-button": "1.0.11"
+    "react-dropdown-button": "1.0.11",
+    "react-slider": "0.4.2"
   },
   "license": "MIT"
 }
