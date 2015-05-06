@@ -1,14 +1,18 @@
 var React = require( "react" );
 
 var hogan = require( "hogan.js" );
+var memoize = require( "lodash/function/memoize" );
+
+var memoHogan = memoize( hogan.compile.bind( hogan ) );
 
 var HoganResult = React.createClass( {
   componentWillMount : function(){
     this.setState( {
-      template : hogan.compile( this.props.template )
+      template : memoHogan( this.props.template )
     } );
   },
   render : function(){
+    console.log( memoHogan.cache );
     var content = this.state.template.render( this.props.data );
     return <div dangerouslySetInnerHTML={{ __html : content }} />;
   }
