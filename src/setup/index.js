@@ -25,7 +25,7 @@ module.exports = {
   readContainersConfig : function lookForContainers( dom ) {
     var containersConfig = {};
     containersConfig.indexSelector = ( function( d ) {
-      var options = d.querySelectorAll( "option" );
+      var options = d.querySelectorAll( "[data-index-name]" );
       var indices = map( options, function( d0 ) {
         return {
           label : d0.innerHTML,
