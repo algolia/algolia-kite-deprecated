@@ -12,7 +12,6 @@ var HoganResult = React.createClass( {
     } );
   },
   render : function(){
-    console.log( memoHogan.cache );
     var content = this.state.template.render( this.props.data );
     return <div dangerouslySetInnerHTML={{ __html : content }} />;
   }
