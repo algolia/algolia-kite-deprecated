@@ -205,7 +205,7 @@ a{
 }
 
 .statistics {
-  text-align : right;
+  text-align : left;
 }
 
 .results-header {
@@ -214,3 +214,9 @@ a{
   align-items: flex-end;
 }
 
+.selectors {
+  text-align : right;
+}
+.selectors > .algolia-magic.show {
+  display: inline-block !important;
+}

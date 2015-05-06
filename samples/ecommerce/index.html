@@ -10,7 +10,9 @@
   <link rel="stylesheet" href="css/material.css" />
   <link rel="stylesheet" href="css/index.css" />
 </head>
-<body data-algolia-app-id="latency" data-algolia-key="6be0576ff61c053d5f9a3225e2a90f76" data-algolia-index="bestbuy">
+<body data-algolia-app-id="latency"
+      data-algolia-key="6be0576ff61c053d5f9a3225e2a90f76"
+      data-algolia-index="bestbuy">
   <div class="container-fluid header">
     <div class="header col-md-12">
       <h1>YOUR search! <span class="powered-by">Powered by Algolia</span></h1>
@@ -22,16 +24,23 @@
     </div>
   </div>
   <div class="container">
-    <div class="row results-header">
-      <div class="algolia-magic index-selector col-md-6">
-        <div data-index-name="bestbuy">Relevance</div>
-        <div data-index-name="bestbuy_price_asc">Lowest price</div>
-        <div data-index-name="bestbuy_price_desc">Highest price</div>
-      </div>
-      <div class="algolia-magic col-md-6 statistics" data-template="#stats-template"></div>
-    </div> 
     <div class="row">
       <div class="col-md-9">
+      <div class="row results-header">
+        <div class="algolia-magic col-md-6 statistics" data-template="#stats-template"></div>
+        <div class="col-md-6 selectors">
+          <div class="algolia-magic index-selector">
+            <div data-index-name="bestbuy">Relevance</div>
+            <div data-index-name="bestbuy_price_asc">Lowest price</div>
+            <div data-index-name="bestbuy_price_desc">Highest price</div>
+          </div>
+          <div class="algolia-magic hits-selector">
+            <div data-hits-per-page="5"></div>
+            <div data-hits-per-page="50"></div>
+            <div data-hits-per-page="20"></div>
+          </div>
+        </div>
+      </div> 
         <div class="row results">
           <div class="algolia-magic result-items col-md-12" data-hit-template="#hit-template" data-hits-per-page="5"></div>
           <div class="algolia-magic pagination col-md-12" data-padding="3"></div>

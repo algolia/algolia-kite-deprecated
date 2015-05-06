@@ -16,6 +16,7 @@ var SearchBox = require( "./components/SearchBox" );
 var Pagination = require( "./components/Pagination" );
 var Hogan = require( "./components/Hogan" );
 var IndexSelector = require( "./components/IndexSelector" );
+var HitsSelector = require( "./components/HitsSelector" );
 
 ( function setupAll() {
   var firstRendering = true;
@@ -32,7 +33,7 @@ var IndexSelector = require( "./components/IndexSelector" );
     disjunctiveFacets : map( containers.disjunctiveFacets, "name" ).concat( map( containers.sliders, "name" ) )
   } );
 
-  helper.on( "result", function( newResult ) {
+  helper.on( "result", function( newResult, state ) {
     result = newResult;
     render( helper, state, result );
   } );
@@ -77,6 +78,12 @@ var IndexSelector = require( "./components/IndexSelector" );
                                    indices={ containers.indexSelector.indices }
                                    selectedIndex={ h.getIndex() } />,
                     containers.indexSelector.node );
+    }
+
+    if( containers.hitsSelector ){
+      React.render( <HitsSelector helper={ h } results={ r } searchState={ s }
+                                  displayOptions={ containers.hitsSelector.displayOptions } />,
+                    containers.hitsSelector.node );
     }
 
     forEach( containers.facets, function( f ) {

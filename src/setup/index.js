@@ -37,6 +37,18 @@ module.exports = {
         indices : indices
       };
     } )( dom.querySelector( ".algolia-magic.index-selector" ) );
+
+    containersConfig.hitsSelector = ( function( d ) {
+      var options = d.querySelectorAll( "[data-hits-per-page]" );
+      var displayOptions = map( options, function( d0 ) {
+        return parseInt( d0.dataset.hitsPerPage, 10 );
+      } );
+      return {
+        node : d,
+        displayOptions : displayOptions
+      };
+    } )( dom.querySelector( ".algolia-magic.hits-selector" ) );
+
     containersConfig.sliders = map(
       dom.querySelectorAll( ".algolia-magic.slider" ),
       function domToSlider( d ) {
