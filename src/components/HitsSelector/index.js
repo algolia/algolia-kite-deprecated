@@ -18,7 +18,10 @@ var HitsSelector = React.createClass( {
   render : function() {
     var selectedOption = parseInt( this.props.searchState.hitsPerPage, 10 );
     var selectableOptions = map(
-      without( this.props.displayOptions, selectedOption ).sort(),
+      without( this.props.displayOptions, selectedOption ).sort( function(a, b){
+        if( a > b ) return 1;
+        return a < b ? -1 : 0;
+      } ),
       function toDisplayObject( opt ) {
         return { label : opt, value : opt };
       }
