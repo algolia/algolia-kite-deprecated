@@ -26,7 +26,7 @@
   },
   "dependencies": {
     "algoliasearch": "3.1.x",
-    "algoliasearch-helper": "2.0.2",
+    "algoliasearch-helper": "2.0.3-beta",
     "hogan.js": "3.0.2",
     "lodash": "3.5.0",
     "react": "0.13.1",

@@ -18,6 +18,8 @@ var Hogan = require( "./components/Hogan" );
 var IndexSelector = require( "./components/IndexSelector" );
 var HitsSelector = require( "./components/HitsSelector" );
 
+var urlManager = require( "./setup/url.js" );
+
 ( function setupAll() {
   var firstRendering = true;
   var appConfig = setup.readAlgoliaConfig( document );
@@ -26,12 +28,24 @@ var HitsSelector = require( "./components/HitsSelector" );
   var result = {};
   var state = {};
 
+  var facets = map( containers.facets, "name" );
+  var disjunctiveFacets = map( containers.disjunctiveFacets, "name" ).concat( map( containers.sliders, "name" ) );
+
+  var defaultUrlState = {
+    page : 0,
+    query : ""
+  };
+  var initialState = urlManager.init(
+    defaultUrlState,
+    {
+      hitsPerPage : containers.results.hitsPerPage,
+      facets : facets,
+      disjunctiveFacets : disjunctiveFacets
+    }
+  );
+
   var client = algoliasearch( appConfig.appID, appConfig.key );
-  var helper = algoliasearchHelper( client, appConfig.index, {
-    hitsPerPage : containers.results.hitsPerPage,
-    facets : map( containers.facets, "name" ),
-    disjunctiveFacets : map( containers.disjunctiveFacets, "name" ).concat( map( containers.sliders, "name" ) )
-  } );
+  var helper = algoliasearchHelper( client, appConfig.index, initialState );
 
   helper.on( "result", function( newResult, state ) {
     result = newResult;
@@ -40,7 +54,15 @@ var HitsSelector = require( "./components/HitsSelector" );
 
   helper.on( "change", function( newState ) {
     state = newState;
+    urlManager.update( state, defaultUrlState );
     render( helper, state, result );
+  } );
+  
+
+  window.addEventListener( "popstate", function( event ){
+    console.log( "stored state", event.state );
+    helper.overrideStateWithoutTriggeringChangeEvent( event.state )
+          .search();
   } );
 
   helper.search();

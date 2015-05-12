@@ -39,7 +39,8 @@ var Facet = React.createClass( {
              <div className="list-group">{values}</div>
            </div>;
   },
-  toggleSelect : function( facetName, facetValue ) {
+  toggleSelect : function( facetName, facetValue, event ) {
+    event.preventDefault();
     this.props.helper.toggleRefine( facetName, facetValue ).search();
   }
 } );
