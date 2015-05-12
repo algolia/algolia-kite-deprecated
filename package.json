@@ -5,6 +5,7 @@
   "main": "index.js",
   "author": "Algolia unicorn factory <hey@algolia.com>",
   "scripts": {
+    "postinstall": "mkdir -p ./dist",
     "build:js": "NODE_ENV=production browserify -d src/index.js | uglifyjs -c warnings=false -m > dist/algoliasearch-ui-kit.min.js && gzip -k -f -9 dist/algoliasearch-ui-kit.min.js",
     "watch:js": "watchify -v -d src/index.js -o dist/algoliasearch-ui-kit.js",
     "serve": "static -z -a 0.0.0.0 ."
