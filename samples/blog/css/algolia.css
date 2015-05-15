@@ -1,0 +1,26 @@
+.algolia-belongs-to-menu {
+  width:100%;
+}
+.algolia-belongs-to-menu--item {
+  font-size: 1.1em;
+  margin-right: 14px;
+  display: inline-block;
+}
+.algolia-belongs-to-menu--item__active {
+  font-weight: bold;
+  border-bottom: solid 2px #2897C5;
+  line-height: 24px;
+}
+
+.algolia-belongs-to-menu--hidden-radio {
+  display:none;
+}
+.algolia-belongs-to-menu--label {
+  cursor:pointer;
+}
+.algolia-belongs-to-menu--count {
+  padding-left: 4px;
+  font-size: .9em;
+  color: #aaa;
+  font-weight: 400;
+}
