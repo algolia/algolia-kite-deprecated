@@ -32,7 +32,8 @@ var DisjunctiveFacet = React.createClass( {
                 onClick={ this.toggleSelect.bind( this, facet.name, facetValue.name ) }>
                <input type="checkbox"
                       onClick={ function( e ) { e.preventDefault(); } }
-                      checked={ facetValue.isRefined } />
+                      checked={ facetValue.isRefined }
+                      readOnly/>
                { facetValue.name } ({ facetValue.value })
              </a>;
     }, this );

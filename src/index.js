@@ -33,7 +33,10 @@ var URLManager = require( "./setup/url.js" );
 
   var defaultUrlState = {
     page : 0,
-    query : ""
+    query : "",
+    disjunctiveFacetsRefinements : {},
+    facetsRefinements : {},
+    numericRefinements : {}
   };
   var urlManager = new URLManager( 
     defaultUrlState,
