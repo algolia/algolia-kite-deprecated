@@ -30,8 +30,8 @@ var HitsSelector = require( "./components/HitsSelector" );
   var client = algoliasearch( appConfig.appID, appConfig.key );
   var helper = algoliasearchHelper( client, appConfig.index, {
     hitsPerPage : containers.results.hitsPerPage,
-    facets : map( containers.facets, "name" ).concat( map( containers.belongsToMenu, "name" ) ),
-    disjunctiveFacets : map( containers.disjunctiveFacets, "name" ).concat( map( containers.sliders, "name" ) )
+    facets : map( containers.facets, "name" ),
+    disjunctiveFacets : map( containers.disjunctiveFacets, "name" ).concat( map( containers.sliders, "name" ) ).concat( map( containers.belongsToMenu, "name" ) )
   } );
 
   helper.on( "result", function( newResult, newState ) {

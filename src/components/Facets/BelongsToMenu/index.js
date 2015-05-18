@@ -1,21 +1,13 @@
 "use strict";
 var React = require( "react" );
-var reduce = require( "lodash/collection/reduce" );
+var forEach = require( "lodash/collection/forEach" );
 var map = require( "lodash/collection/map" );
-var values = require( "lodash/object/values" );
 
 var BelongsToMenu = React.createClass( {
   componentWillMount : function() {
-    var categories = this.props.facet.data;
-    categories.All = reduce( values( categories ), function( total, n ) {
-      return total + n;
-    } );
-
     this.setState( {
-      facetName : this.props.facet.name,
       uniqueId : this.uniqueId(),
-      selectedCategory : "All",
-      categories : categories
+      selectedCategory : "All"
     } );
   },
   uniqueId : function uniqueId() {
@@ -25,37 +17,49 @@ var BelongsToMenu = React.createClass( {
   },
   // TODO: This helps in writing BEM classes, but if its usage is to be common
   // all over the plugin, this should go elsewhere.
-  bemHelper: function(block) {
-    return function(element, modifier) {
-      if (!element) {
+  bemHelper : function( block ) {
+    return function( element, modifier ) {
+      if ( !element ) {
         return block;
       }
-      if (!modifier) {
+      if ( !modifier ) {
         return block + "--" + element;
       }
       return block + "--" + element + "__" + modifier;
     };
   },
+  getCategories : function getCategories( facets ) {
+    var categories = [];
+    var allCount = 0;
+    forEach( facets, function( count, name ) {
+      categories.push( {name : name, count : count} );
+      allCount += count;
+    } );
+    categories.unshift( {name : "All", count : allCount} );
+    return categories;
+  },
   render : function() {
-    var categories = this.state.categories;
-    var uniqueId = this.state.uniqueId;
     var self = this;
-    var bem = this.bemHelper('algolia-belongs-to-menu');
+    var categories = self.getCategories( self.props.facet.data );
+    var uniqueId = self.state.uniqueId;
+    var bem = self.bemHelper( "algolia-belongs-to-menu" );
 
-    var lis = map( categories, function( count, category ) {
-      var inputId = uniqueId + "-" + category;
-      var onChange = self.onChange.bind(self, category);
-      var className = bem('item');
-      if (category === self.state.selectedCategory) {
-        className += " " + bem('item', 'active');
+    var lis = map( categories, function( category ) {
+      var name = category.name;
+      var count = category.count;
+      var inputId = uniqueId + "-" + name;
+      var onChange = self.onChange.bind( self, name );
+      var className = bem( "item" );
+      if ( name === self.state.selectedCategory ) {
+        className += " " + bem( "item", "active" );
       }
 
       return (
         <li className={className} key={inputId}>
-          <input className={bem('hidden-radio')} type="radio" name={uniqueId} value={category} id={inputId} onChange={onChange} />
-          <label className={bem('label')} htmlFor={inputId} >
-            {category}
-            <span className={bem('count')}>{count}</span>
+          <input className={bem( "hidden-radio" )} type="radio" name={uniqueId} value={name} id={inputId} onChange={onChange} />
+          <label className={bem( "label" )} htmlFor={inputId} >
+            {name}
+            <span className={bem( "count" )}>{count}</span>
           </label>
         </li>
       );
@@ -63,14 +67,15 @@ var BelongsToMenu = React.createClass( {
 
     return <ul className="algolia-belongs-to-menu">{lis}</ul>;
   },
-  onChange : function onChange( category ) {
-    this.setState({ 
-      selectedCategory: category
-    });
+  onChange : function onChange( categoryName ) {
+    var facetName = this.props.facet.name;
+    this.setState( {
+      selectedCategory : categoryName
+    } );
 
-    this.props.helper.clearRefinements(this.state.facetName);
-    if (category !== "All") {
-      this.props.helper.toggleRefine( this.state.facetName, category );
+    this.props.helper.clearRefinements( facetName );
+    if ( categoryName !== "All" ) {
+      this.props.helper.toggleRefine( facetName, categoryName );
     }
     this.props.helper.search();
   }
