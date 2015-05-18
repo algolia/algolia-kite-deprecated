@@ -64,13 +64,12 @@ module.exports = {
         };
       } );
 
-    containersConfig.belongsToMenu = map(
-      dom.querySelectorAll( ".algolia-magic.belongs-to-menu" ),
-      function domToBelongsToMenu( d ) {
+    containersConfig.tabMenu = map(
+      dom.querySelectorAll( ".algolia-magic-tab-menu" ),
+      function domToBelongsToTabMenu( d ) {
         return {
           node : d,
-          name : d.dataset.facetName,
-          sort : d.dataset.sort
+          name : d.dataset.algoliaFacetName
         };
       } );
 

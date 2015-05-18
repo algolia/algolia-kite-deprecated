@@ -9,7 +9,7 @@ var map = require( "lodash/collection/map" );
 var setup = require( "./setup" );
 
 var Slider = require( "./components/Facets/Slider" );
-var BelongsToMenu = require( "./components/Facets/BelongsToMenu" );
+var TabMenu = require( "./components/Facets/TabMenu" );
 var ConjunctiveF = require( "./components/Facets/Conjunctive" );
 var DisjunctiveF = require( "./components/Facets/Disjunctive" );
 var Results = require( "./components/Results" );
@@ -31,7 +31,7 @@ var HitsSelector = require( "./components/HitsSelector" );
   var helper = algoliasearchHelper( client, appConfig.index, {
     hitsPerPage : containers.results.hitsPerPage,
     facets : map( containers.facets, "name" ),
-    disjunctiveFacets : map( containers.disjunctiveFacets, "name" ).concat( map( containers.sliders, "name" ) ).concat( map( containers.belongsToMenu, "name" ) )
+    disjunctiveFacets : map( containers.disjunctiveFacets, "name" ).concat( map( containers.sliders, "name" ) ).concat( map( containers.tabMenu, "name" ) )
   } );
 
   helper.on( "result", function( newResult, newState ) {
@@ -76,7 +76,9 @@ var HitsSelector = require( "./components/HitsSelector" );
 
     if( containers.indexSelector.length > 0 ) {
 
-      React.render( <IndexSelector helper={ h } results={ r } searchState={ s }
+      React.render( <IndexSelector helper={ h }
+                                   results={ r }
+                                   searchState={ s }
                                    indices={ containers.indexSelector.indices }
                                    selectedIndex={ h.getIndex() } />,
                     containers.indexSelector.node );
@@ -88,27 +90,27 @@ var HitsSelector = require( "./components/HitsSelector" );
                     containers.hitsSelector.node );
     }
 
-    forEach( containers.belongsToMenu, function( f ) {
-      React.render( <BelongsToMenu searchState={ s }
-                            facet={ getFacetOrDefaults( r, f.name ) }
-                            helper={ h }
-                            sort={ f.sort } />,
+    forEach( containers.tabMenu, function( f ) {
+      React.render( <TabMenu searchState={ s }
+                             facet={ getFacetOrDefaults( r, f.name ) }
+                             helper={ h }
+                             sort={ f.sort } />,
                     f.node );
     } );
 
     forEach( containers.facets, function( f ) {
       React.render( <ConjunctiveF searchState={ s }
-                            facet={ getFacetOrDefaults( r, f.name ) }
-                            helper={ h }
-                            sort={ f.sort } />,
+                                  facet={ getFacetOrDefaults( r, f.name ) }
+                                  helper={ h }
+                                  sort={ f.sort } />,
                     f.node );
     } );
 
     forEach( containers.disjunctiveFacets, function( f ) {
       React.render( <DisjunctiveF searchState={ s }
-                            facet={ getFacetOrDefaults( r, f.name ) }
-                            helper={ h }
-                            sort={ f.sort } />,
+                                  facet={ getFacetOrDefaults( r, f.name ) }
+                                  helper={ h }
+                                  sort={ f.sort } />,
                     f.node );
     } );
 
