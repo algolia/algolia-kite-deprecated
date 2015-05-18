@@ -18,7 +18,7 @@ var Hogan = require( "./components/Hogan" );
 var IndexSelector = require( "./components/IndexSelector" );
 var HitsSelector = require( "./components/HitsSelector" );
 
-var urlManager = require( "./setup/url.js" );
+var URLManager = require( "./setup/url.js" );
 
 ( function setupAll() {
   var firstRendering = true;
@@ -35,7 +35,7 @@ var urlManager = require( "./setup/url.js" );
     page : 0,
     query : ""
   };
-  var initialState = urlManager.init(
+  var urlManager = new URLManager( 
     defaultUrlState,
     {
       hitsPerPage : containers.results.hitsPerPage,
@@ -43,6 +43,8 @@ var urlManager = require( "./setup/url.js" );
       disjunctiveFacets : disjunctiveFacets
     }
   );
+
+  var initialState = urlManager.init();
 
   var client = algoliasearch( appConfig.appID, appConfig.key );
   var helper = algoliasearchHelper( client, appConfig.index, initialState );
@@ -54,13 +56,12 @@ var urlManager = require( "./setup/url.js" );
 
   helper.on( "change", function( newState ) {
     state = newState;
-    urlManager.update( state, defaultUrlState );
+    urlManager.update( state );
     render( helper, state, result );
   } );
   
 
   window.addEventListener( "popstate", function( event ){
-    console.log( "stored state", event.state );
     helper.overrideStateWithoutTriggeringChangeEvent( event.state )
           .search();
   } );
