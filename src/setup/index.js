@@ -25,6 +25,7 @@ module.exports = {
   readContainersConfig : function lookForContainers( dom ) {
     var containersConfig = {};
     containersConfig.indexSelector = ( function( d ) {
+      if( d === null ) return undefined;
       var options = d.querySelectorAll( "[data-index-name]" );
       var indices = map( options, function( d0 ) {
         return {
@@ -39,6 +40,7 @@ module.exports = {
     } )( dom.querySelector( ".algolia-magic.index-selector" ) );
 
     containersConfig.hitsSelector = ( function( d ) {
+      if( d === null ) return undefined;
       var options = d.querySelectorAll( "[data-hits-per-page]" );
       var displayOptions = map( options, function( d0 ) {
         return parseInt( d0.dataset.hitsPerPage, 10 );
