@@ -22,6 +22,7 @@
     "eslint-plugin-react": "2.2.0",
     "minifyify": "6.4.0",
     "node-static": "0.7.6",
+    "uglifyjs": "2.4.10",
     "watchify": "2.4.0"
   },
   "dependencies": {
