@@ -29,12 +29,12 @@ class Pagination extends React.Component {
   previousPageLink( pager ) {
     return pager.isFirstPage() ?
       <li className="disabled">
-        <a href="#" aria-label="Previous">
+        <a href="#" aria-label="Previous" onClick={ function(e){ e.preventDefault(); } }>
           <span aria-hidden="true">{ this.props.labels.previous }</span>
         </a>
       </li> :
       <li onClick={ this.setPage.bind( this, pager.currentPage - 1 ) }>
-        <a href="#" aria-label="Previous">
+        <a href="#" aria-label="Previous" onClick={ function(e){ e.preventDefault(); } }>
           <span aria-hidden="true">{ this.props.labels.previous }</span>
         </a>
       </li>;
@@ -42,12 +42,12 @@ class Pagination extends React.Component {
   nextPageLink( pager ) {
     return pager.isLastPage() ?
       <li className="disabled">
-        <a href="#" aria-label="Next">
+        <a href="#" aria-label="Next" onClick={ function(e){ e.preventDefault(); } }>
           <span aria-hidden="true">{ this.props.labels.next }</span>
         </a>
       </li> :
       <li onClick={ this.setPage.bind( this, pager.currentPage + 1 ) }>
-        <a href="#" aria-label="Next">
+        <a href="#" aria-label="Next" onClick={ function(e){ e.preventDefault(); } }>
           <span aria-hidden="true">{ this.props.labels.next }</span>
         </a>
       </li>;
@@ -55,12 +55,12 @@ class Pagination extends React.Component {
   firstPageLink( pager ) {
     return pager.isFirstPage() ?
       <li className="disabled">
-        <a href="#" aria-label="Previous">
+        <a href="#" aria-label="Previous" onClick={ function(e){ e.preventDefault(); } }>
           <span aria-hidden="true">{ this.props.labels.first }</span>
         </a>
       </li> :
       <li onClick={ this.setPage.bind( this, 0 ) }>
-        <a href="#" aria-label="Previous">
+        <a href="#" aria-label="Previous" onClick={ function(e){ e.preventDefault(); } }>
           <span aria-hidden="true">{ this.props.labels.first }</span>
         </a>
       </li>;
@@ -68,12 +68,12 @@ class Pagination extends React.Component {
   lastPageLink( pager ) {
     return pager.isLastPage() ?
       <li className="disabled">
-        <a href="#" aria-label="Next">
+        <a href="#" aria-label="Next" onClick={ function(e){ e.preventDefault(); } }>
           <span aria-hidden="true">{ this.props.labels.last }</span>
         </a>
       </li> :
       <li onClick={ this.setPage.bind( this, pager.total - 1 ) }>
-        <a href="#" aria-label="Next">
+        <a href="#" aria-label="Next" onClick={ function(e){ e.preventDefault(); } }>
           <span aria-hidden="true">{ this.props.labels.last }</span>
         </a>
       </li>;
@@ -92,7 +92,7 @@ class Pagination extends React.Component {
     var className = pageNumber === pager.currentPage ? "active" : "";
     return <li key={ pageNumber } onClick={ this.setPage.bind( this, pageNumber ) }
                className={ className } >
-             <a href="#">
+             <a href="#" onClick={ function(e){ e.preventDefault(); } }>
                { pageNumber + 1 }
              </a>
            </li>;
