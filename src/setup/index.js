@@ -111,7 +111,7 @@ module.exports = {
         node : d,
         hitsPerPage : d.dataset.hitsPerPage || 12,
         hitTemplate : dom.querySelector( d.dataset.hitTemplate ).innerHTML,
-        noResultsTemplate : noResTmplate 
+        noResultsTemplate : noResTmplate
       };
     } )( dom.querySelector( ".algolia-magic.result-items" ) );
 
