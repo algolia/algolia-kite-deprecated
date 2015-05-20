@@ -2,6 +2,7 @@
 var React = require( "react" );
 var cx = require( "classnames" );
 var forEach = require( "lodash/collection/forEach" );
+var sortBy = require( "lodash/collection/sortBy" );
 var map = require( "lodash/collection/map" );
 var bem = require( "../../BemHelper" )( "algolia-magic-tab-menu" );
 
@@ -23,6 +24,7 @@ var TabMenu = React.createClass( {
       results.push( {value : value, count : count} );
       allCount += count;
     } );
+    results = sortBy( results, "count" ).reverse();
     results.unshift( {value : facetAllValue, count : allCount} );
     return results;
   },
