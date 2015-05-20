@@ -16,7 +16,7 @@ module.exports = {
     };
   },
   /**
-   * Read the current the DOM node for component configurations. Return a list
+   * Read the current DOM node for component configurations. Return a list
    * of components to render. Those components should follow the same props
    * signature : { Helper, SearchResults, SearchState }
    * @param {DOMNode} dom the root dom node in which to look for components
@@ -25,6 +25,9 @@ module.exports = {
   readContainersConfig : function lookForContainers( dom ) {
     var containersConfig = {};
     containersConfig.indexSelector = ( function( d ) {
+      if ( !d ) {
+        return [];
+      }
       var options = d.querySelectorAll( "[data-index-name]" );
       var indices = map( options, function( d0 ) {
         return {
@@ -39,6 +42,9 @@ module.exports = {
     } )( dom.querySelector( ".algolia-magic.index-selector" ) );
 
     containersConfig.hitsSelector = ( function( d ) {
+      if ( !d ) {
+        return [];
+      }
       var options = d.querySelectorAll( "[data-hits-per-page]" );
       var displayOptions = map( options, function( d0 ) {
         return parseInt( d0.dataset.hitsPerPage, 10 );
@@ -55,6 +61,15 @@ module.exports = {
         return {
           node : d,
           name : d.dataset.facetName
+        };
+      } );
+
+    containersConfig.tabMenu = map(
+      dom.querySelectorAll( ".algolia-magic-tab-menu" ),
+      function domToBelongsToTabMenu( d ) {
+        return {
+          node : d,
+          name : d.dataset.algoliaFacetName
         };
       } );
 

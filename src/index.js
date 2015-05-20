@@ -9,6 +9,7 @@ var map = require( "lodash/collection/map" );
 var setup = require( "./setup" );
 
 var Slider = require( "./components/Facets/Slider" );
+var TabMenu = require( "./components/Facets/TabMenu" );
 var ConjunctiveF = require( "./components/Facets/Conjunctive" );
 var DisjunctiveF = require( "./components/Facets/Disjunctive" );
 var Results = require( "./components/Results" );
@@ -30,12 +31,12 @@ var HitsSelector = require( "./components/HitsSelector" );
   var helper = algoliasearchHelper( client, appConfig.index, {
     hitsPerPage : containers.results.hitsPerPage,
     facets : map( containers.facets, "name" ),
-    disjunctiveFacets : map( containers.disjunctiveFacets, "name" ).concat( map( containers.sliders, "name" ) )
+    disjunctiveFacets : map( containers.disjunctiveFacets, "name" ).concat( map( containers.sliders, "name" ) ).concat( map( containers.tabMenu, "name" ) )
   } );
 
-  helper.on( "result", function( newResult, state ) {
+  helper.on( "result", function( newResult, newState ) {
     result = newResult;
-    render( helper, state, result );
+    render( helper, newState, result );
   } );
 
   helper.on( "change", function( newState ) {
@@ -46,7 +47,7 @@ var HitsSelector = require( "./components/HitsSelector" );
   helper.search();
 
   function render( h, s, r ) {
-    if( containers.results ){
+    if( containers.results ) {
       React.render( <Results results={ r }
                              searchState={ s }
                              helper={ h }
@@ -54,7 +55,7 @@ var HitsSelector = require( "./components/HitsSelector" );
                     containers.results.node );
     }
 
-    if( containers.searchBox ){
+    if( containers.searchBox ) {
       React.render( <SearchBox helper={ h }
                                placeholder={ containers.searchBox.placeholder } />,
                     containers.searchBox.node );
@@ -73,43 +74,54 @@ var HitsSelector = require( "./components/HitsSelector" );
                     containers.statistics.node );
     }
 
-    if( containers.indexSelector ){
-      React.render( <IndexSelector helper={ h } results={ r } searchState={ s }
+    if( containers.indexSelector.length > 0 ) {
+
+      React.render( <IndexSelector helper={ h }
+                                   results={ r }
+                                   searchState={ s }
                                    indices={ containers.indexSelector.indices }
                                    selectedIndex={ h.getIndex() } />,
                     containers.indexSelector.node );
     }
 
-    if( containers.hitsSelector ){
+    if( containers.hitsSelector.length > 0 ) {
       React.render( <HitsSelector helper={ h } results={ r } searchState={ s }
                                   displayOptions={ containers.hitsSelector.displayOptions } />,
                     containers.hitsSelector.node );
     }
 
+    forEach( containers.tabMenu, function( f ) {
+      React.render( <TabMenu searchState={ s }
+                             facet={ getFacetOrDefaults( r, f.name ) }
+                             helper={ h }
+                             sort={ f.sort } />,
+                    f.node );
+    } );
+
     forEach( containers.facets, function( f ) {
       React.render( <ConjunctiveF searchState={ s }
-                            facet={ getFacetOrDefaults( r, f.name ) }
-                            helper={ h }
-                            sort={ f.sort } />,
+                                  facet={ getFacetOrDefaults( r, f.name ) }
+                                  helper={ h }
+                                  sort={ f.sort } />,
                     f.node );
     } );
 
     forEach( containers.disjunctiveFacets, function( f ) {
       React.render( <DisjunctiveF searchState={ s }
-                            facet={ getFacetOrDefaults( r, f.name ) }
-                            helper={ h }
-                            sort={ f.sort } />,
+                                  facet={ getFacetOrDefaults( r, f.name ) }
+                                  helper={ h }
+                                  sort={ f.sort } />,
                     f.node );
     } );
 
-    forEach( containers.sliders , function( slider ) {
+    forEach( containers.sliders, function( slider ) {
       React.render( <Slider searchState={ s }
                             facet={ getFacetOrDefaults( r, slider.name ) }
                             helper={ h } />,
                     slider.node );
     } );
 
-    if( firstRendering ){
+    if( firstRendering ) {
       forEach( document.querySelectorAll( ".algolia-magic" ), function( d ) {
         d.classList.add( "show" );
       } );
@@ -117,7 +129,7 @@ var HitsSelector = require( "./components/HitsSelector" );
     }
   }
 
-  function getFacetOrDefaults( results, facetName ){
+  function getFacetOrDefaults( results, facetName ) {
     return results.getFacetByName( facetName ) || {name : facetName, data : [] };
   }
 } )();
