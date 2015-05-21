@@ -74,7 +74,7 @@ var HitsSelector = require( "./components/HitsSelector" );
                     containers.statistics.node );
     }
 
-    if( containers.indexSelector.length > 0 ) {
+    if( containers.indexSelector ) {
 
       React.render( <IndexSelector helper={ h }
                                    results={ r }
@@ -84,7 +84,7 @@ var HitsSelector = require( "./components/HitsSelector" );
                     containers.indexSelector.node );
     }
 
-    if( containers.hitsSelector.length > 0 ) {
+    if( containers.hitsSelector ) {
       React.render( <HitsSelector helper={ h } results={ r } searchState={ s }
                                   displayOptions={ containers.hitsSelector.displayOptions } />,
                     containers.hitsSelector.node );
