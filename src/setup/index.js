@@ -106,10 +106,13 @@ module.exports = {
     containersConfig.results = ( function domToResult( d ) {
       if( d === null ) return undefined;
       else {
+        var noResSelector = d.dataset.noResultsTemplate;
+        var noResTmplate = noResSelector ? dom.querySelector( noResSelector ).innerHTML : "";
         return {
           node : d,
           hitsPerPage : d.dataset.hitsPerPage || 12,
-          hitTemplate : dom.querySelector( d.dataset.hitTemplate ).innerHTML
+          hitTemplate : dom.querySelector( d.dataset.hitTemplate ).innerHTML,
+          noResultsTemplate : noResTmplate 
         };
       }
     } )( dom.querySelector( ".algolia-magic.result-items" ) );

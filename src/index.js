@@ -51,6 +51,7 @@ var HitsSelector = require( "./components/HitsSelector" );
       React.render( <Results results={ r }
                              searchState={ s }
                              helper={ h }
+                             noResultsTemplate={ containers.results.noResultsTemplate }
                              hitTemplate={ containers.results.hitTemplate } />,
                     containers.results.node );
     }
