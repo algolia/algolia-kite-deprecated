@@ -7,6 +7,9 @@ var Paginator = require( "./Paginator" );
 class Pagination extends React.Component {
   render() {
     var results = this.props.results;
+
+    if( results.hits.length < 1 ) return <span/>;
+
     var pager = new Paginator( {
       currentPage : results.page,
       total : results.nbPages,
