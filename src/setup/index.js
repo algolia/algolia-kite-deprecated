@@ -95,43 +95,42 @@ module.exports = {
 
     containersConfig.searchBox = ( function domToSearchBox( d ) {
       if( d === null ) return undefined;
-      else {
-        return {
-          node : d,
-          placeholder : d.dataset.placeholder
-        };
-      }
+
+      return {
+        node : d,
+        placeholder : d.dataset.placeholder
+      };
     } )( dom.querySelector( ".algolia-magic.search-box" ) );
 
     containersConfig.results = ( function domToResult( d ) {
       if( d === null ) return undefined;
-      else {
-        return {
-          node : d,
-          hitsPerPage : d.dataset.hitsPerPage || 12,
-          hitTemplate : dom.querySelector( d.dataset.hitTemplate ).innerHTML
-        };
-      }
+
+      var noResSelector = d.dataset.noResultsTemplate;
+      var noResTmplate = noResSelector ? dom.querySelector( noResSelector ).innerHTML : "";
+      return {
+        node : d,
+        hitsPerPage : d.dataset.hitsPerPage || 12,
+        hitTemplate : dom.querySelector( d.dataset.hitTemplate ).innerHTML,
+        noResultsTemplate : noResTmplate 
+      };
     } )( dom.querySelector( ".algolia-magic.result-items" ) );
 
     containersConfig.pagination = ( function domToPagination( d ) {
       if( d === null ) return undefined;
-      else {
-        return {
-          node : d,
-          padding : d.dataset.padding || 2
-        };
-      }
+
+      return {
+        node : d,
+        padding : d.dataset.padding || 2
+      };
     } )( dom.querySelector( ".algolia-magic.pagination" ) );
 
     containersConfig.statistics = ( function domToStats( d ) {
       if( d === null ) return undefined;
-      else {
-        return {
-          node : d,
-          template : dom.querySelector( d.dataset.template ).innerHTML
-        };
-      }
+
+      return {
+        node : d,
+        template : dom.querySelector( d.dataset.template ).innerHTML
+      };
     } )( dom.querySelector( ".algolia-magic.statistics" ) );
 
     return containersConfig;
