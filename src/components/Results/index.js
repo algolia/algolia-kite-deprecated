@@ -23,9 +23,9 @@ class Results extends React.Component {
     } );
     return <div className="search_list search_results_container row">{ renderedHits }</div>
   }
-  renderNoResults( results, noResultsTemplate ){
+  renderNoResults( results, noResultsTemplate ) {
     return  <div className="search_list search_results_container row">
-              <Hogan data={ results } template={ this.props.noResultsTemplate } />
+              <Hogan data={ results } template={ noResultsTemplate } />
             </div>;
   }
 }
