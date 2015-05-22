@@ -28,31 +28,24 @@ class Pagination extends React.Component {
     return <nav><ul className="pagination top_pagination"></ul></nav>;
   }
   previousPageLink( pager ) {
-    return pager.isFirstPage() ?
-      <PaginationLink href="#" label={ this.props.labels.previous } ariaLabel="Previous"
-                      helper={ this.props.helper } /> :
-      <PaginationLink href="#" label={ this.props.labels.previous } ariaLabel="Previous"
-                      helper={ this.props.helper } page={pager.currentPage - 1}/>;
+    var page = pager.isFirstPage() ? undefined : pager.currentPage - 1;
+    return <PaginationLink href="#" label={ this.props.labels.previous } ariaLabel="Previous"
+                           helper={ this.props.helper } page={ page } />;
   }
   nextPageLink( pager ) {
-    return pager.isLastPage() ?
-      <PaginationLink href="#" label={ this.props.labels.next } ariaLabel="Next"
-                      helper={ this.props.helper } /> :
-      <PaginationLink href="#" label={ this.props.labels.next } ariaLabel="Next"
-                      helper={ this.props.helper } page={ pager.currentPage + 1 } />
+    var page = pager.isLastPage() ? undefined : pager.currentPage - 1;
+    return <PaginationLink href="#" label={ this.props.labels.next } ariaLabel="Next"
+                           helper={ this.props.helper } page={ page } />
   }
   firstPageLink( pager ) {
-    return pager.isFirstPage() ?
-        <PaginationLink href="#" label={ this.props.labels.first } ariaLabel="First"
-                        helper={ this.props.helper } /> :
-        <PaginationLink href="#" label={ this.props.labels.first } ariaLabel="First"
-                        helper={ this.props.helper } page={ 0 } />;
+    var page = pager.isFirstPage() ? undefined : 0;
+    return <PaginationLink href="#" label={ this.props.labels.first } ariaLabel="First"
+                           helper={ this.props.helper } page={ page } />;
   }
   lastPageLink( pager ) {
-    return pager.isLastPage() ?
-        <PaginationLink href="#" label={ this.props.labels.last } ariaLabel="Last" /> :
-        <PaginationLink href="#" label={ this.props.labels.last } ariaLabel="Last"
-                        helper={ this.props.helper } page={ pager.total - 1 } />;
+    var page = pager.isLastPage() ? undefined : pager.total - 1;
+    return <PaginationLink href="#" label={ this.props.labels.last } ariaLabel="Last"
+                           helper={ this.props.helper } page={ page } />;
   }
   pages( pager ) {
     var pages = pager.pages();
