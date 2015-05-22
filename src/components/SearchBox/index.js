@@ -15,6 +15,7 @@ var SearchBox = React.createClass( {
     var onFocus = this.props.onFocus;
     return <form className="autocomplete-form" onSubmit={ function( e ) { e.preventDefault(); } }>
              <input type="text"
+                    value={ this.props.helper.state.query }
                     placeholder={ this.props.placeholder }
                     name="query"
                     className="searchbox main form-control"

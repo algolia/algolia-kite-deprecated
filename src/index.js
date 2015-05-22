@@ -19,6 +19,8 @@ var Hogan = require( "./components/Hogan" );
 var IndexSelector = require( "./components/IndexSelector" );
 var HitsSelector = require( "./components/HitsSelector" );
 
+var URLManager = require( "./setup/url.js" );
+
 ( function setupAll() {
   var firstRendering = true;
   var appConfig = setup.readAlgoliaConfig( document );
@@ -27,12 +29,30 @@ var HitsSelector = require( "./components/HitsSelector" );
   var result = {};
   var state = {};
 
+  var facets = map( containers.facets, "name" );
+  var disjunctiveFacets = map( containers.disjunctiveFacets, "name" )
+                         .concat( map( containers.sliders, "name" ) )
+                         .concat( map( containers.tabMenu, "name" ) )
+  var defaultUrlState = {
+    page : 0,
+    query : "",
+    disjunctiveFacetsRefinements : {},
+    facetsRefinements : {},
+    numericRefinements : {}
+  };
+  var urlManager = new URLManager( 
+    defaultUrlState,
+    {
+      hitsPerPage : containers.results.hitsPerPage,
+      facets : facets,
+      disjunctiveFacets : disjunctiveFacets
+    }
+  );
+
+  var initialState = urlManager.init();
+
   var client = algoliasearch( appConfig.appID, appConfig.key );
-  var helper = algoliasearchHelper( client, appConfig.index, {
-    hitsPerPage : containers.results.hitsPerPage,
-    facets : map( containers.facets, "name" ),
-    disjunctiveFacets : map( containers.disjunctiveFacets, "name" ).concat( map( containers.sliders, "name" ) ).concat( map( containers.tabMenu, "name" ) )
-  } );
+  var helper = algoliasearchHelper( client, appConfig.index, initialState );
 
   helper.on( "result", function( newResult, newState ) {
     result = newResult;
@@ -41,7 +61,14 @@ var HitsSelector = require( "./components/HitsSelector" );
 
   helper.on( "change", function( newState ) {
     state = newState;
+    urlManager.update( state );
     render( helper, state, result );
+  } );
+  
+
+  window.addEventListener( "popstate", function( event ){
+    helper.overrideStateWithoutTriggeringChangeEvent( event.state )
+          .search();
   } );
 
   helper.search();

@@ -32,7 +32,8 @@ var DisjunctiveFacet = React.createClass( {
                 onClick={ this.toggleSelect.bind( this, facet.name, facetValue.name ) }>
                <input type="checkbox"
                       onClick={ function( e ) { e.preventDefault(); } }
-                      checked={ facetValue.isRefined } />
+                      checked={ facetValue.isRefined }
+                      readOnly/>
                { facetValue.name } ({ facetValue.value })
              </a>;
     }, this );
@@ -42,7 +43,8 @@ var DisjunctiveFacet = React.createClass( {
              <div className="list-group">{values}</div>
            </div>;
   },
-  toggleSelect : function( facetName, facetValue ) {
+  toggleSelect : function( facetName, facetValue, event ) {
+    event.preventDefault();
     this.props.helper.toggleRefine( facetName, facetValue ).search();
   }
 } );

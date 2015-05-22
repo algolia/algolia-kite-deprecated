@@ -25,9 +25,8 @@ module.exports = {
   readContainersConfig : function lookForContainers( dom ) {
     var containersConfig = {};
     containersConfig.indexSelector = ( function( d ) {
-      if ( !d ) {
-        return [];
-      }
+      if( d === null ) return undefined;
+
       var options = d.querySelectorAll( "[data-index-name]" );
       var indices = map( options, function( d0 ) {
         return {
@@ -35,6 +34,7 @@ module.exports = {
           index : d0.dataset.indexName
         };
       } );
+
       return {
         node : d,
         indices : indices
@@ -42,13 +42,13 @@ module.exports = {
     } )( dom.querySelector( ".algolia-magic.index-selector" ) );
 
     containersConfig.hitsSelector = ( function( d ) {
-      if ( !d ) {
-        return [];
-      }
+      if( d === null ) return undefined;
+
       var options = d.querySelectorAll( "[data-hits-per-page]" );
       var displayOptions = map( options, function( d0 ) {
         return parseInt( d0.dataset.hitsPerPage, 10 );
       } );
+
       return {
         node : d,
         displayOptions : displayOptions

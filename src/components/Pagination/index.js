@@ -3,6 +3,7 @@ var React = require( "react" );
 var forEach = require( "lodash/collection/forEach" );
 
 var Paginator = require( "./Paginator" );
+var PaginationLink = require( "./PaginationLink" );
 
 class Pagination extends React.Component {
   render() {
@@ -30,81 +31,40 @@ class Pagination extends React.Component {
     return <nav><ul className="pagination top_pagination"></ul></nav>;
   }
   previousPageLink( pager ) {
-    return pager.isFirstPage() ?
-      <li className="disabled">
-        <a href="#" aria-label="Previous">
-          <span aria-hidden="true">{ this.props.labels.previous }</span>
-        </a>
-      </li> :
-      <li onClick={ this.setPage.bind( this, pager.currentPage - 1 ) }>
-        <a href="#" aria-label="Previous">
-          <span aria-hidden="true">{ this.props.labels.previous }</span>
-        </a>
-      </li>;
+    var page = pager.isFirstPage() ? undefined : pager.currentPage - 1;
+    return <PaginationLink href="#" label={ this.props.labels.previous } ariaLabel="Previous"
+                           helper={ this.props.helper } page={ page } />;
   }
   nextPageLink( pager ) {
-    return pager.isLastPage() ?
-      <li className="disabled">
-        <a href="#" aria-label="Next">
-          <span aria-hidden="true">{ this.props.labels.next }</span>
-        </a>
-      </li> :
-      <li onClick={ this.setPage.bind( this, pager.currentPage + 1 ) }>
-        <a href="#" aria-label="Next">
-          <span aria-hidden="true">{ this.props.labels.next }</span>
-        </a>
-      </li>;
+    var page = pager.isLastPage() ? undefined : pager.currentPage - 1;
+    return <PaginationLink href="#" label={ this.props.labels.next } ariaLabel="Next"
+                           helper={ this.props.helper } page={ page } />
   }
   firstPageLink( pager ) {
-    return pager.isFirstPage() ?
-      <li className="disabled">
-        <a href="#" aria-label="Previous">
-          <span aria-hidden="true">{ this.props.labels.first }</span>
-        </a>
-      </li> :
-      <li onClick={ this.setPage.bind( this, 0 ) }>
-        <a href="#" aria-label="Previous">
-          <span aria-hidden="true">{ this.props.labels.first }</span>
-        </a>
-      </li>;
+    var page = pager.isFirstPage() ? undefined : 0;
+    return <PaginationLink href="#" label={ this.props.labels.first } ariaLabel="First"
+                           helper={ this.props.helper } page={ page } />;
   }
   lastPageLink( pager ) {
-    return pager.isLastPage() ?
-      <li className="disabled">
-        <a href="#" aria-label="Next">
-          <span aria-hidden="true">{ this.props.labels.last }</span>
-        </a>
-      </li> :
-      <li onClick={ this.setPage.bind( this, pager.total - 1 ) }>
-        <a href="#" aria-label="Next">
-          <span aria-hidden="true">{ this.props.labels.last }</span>
-        </a>
-      </li>;
+    var page = pager.isLastPage() ? undefined : pager.total - 1;
+    return <PaginationLink href="#" label={ this.props.labels.last } ariaLabel="Last"
+                           helper={ this.props.helper } page={ page } />;
   }
   pages( pager ) {
     var pages = pager.pages();
     var elements = [];
 
     forEach( pages, function( pageNumber ) {
-      elements.push( this.page( pager, pageNumber ) );
+      var className = pageNumber === pager.currentPage ? "active" : "";
+      elements.push( 
+        <PaginationLink href="#" label={ pageNumber + 1 } ariaLabel={ pageNumber + 1 }
+                        helper={ this.props.helper } page={ pageNumber }
+                        key={ pageNumber }
+                        className={ className} />
+      );
     }, this );
 
     return elements;
-  }
-  page( pager, pageNumber ) {
-    var className = pageNumber === pager.currentPage ? "active" : "";
-    return <li key={ pageNumber } onClick={ this.setPage.bind( this, pageNumber ) }
-               className={ className } >
-             <a href="#">
-               { pageNumber + 1 }
-             </a>
-           </li>;
-  }
-  ellipsis() {
-    return <li className="disabled"><a>...</a></li>;
-  }
-  setPage( newPage ) {
-    this.props.helper.setCurrentPage( newPage ).search();
   }
 }
 

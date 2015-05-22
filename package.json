@@ -23,6 +23,7 @@
     "eslint-plugin-react": "2.2.0",
     "minifyify": "6.4.0",
     "node-static": "0.7.6",
+    "uglifyjs": "2.4.10",
     "watchify": "2.4.0"
   },
   "dependencies": {
@@ -31,6 +32,7 @@
     "classnames": "2.1.1",
     "hogan.js": "3.0.2",
     "lodash": "3.5.0",
+    "qs": "2.4.2",
     "react": "0.13.1",
     "react-dropdown-button": "1.0.11",
     "react-slider": "0.4.2"
