@@ -16,7 +16,7 @@ module.exports = {
     };
   },
   /**
-   * Read the current the DOM node for component configurations. Return a list
+   * Read the current DOM node for component configurations. Return a list
    * of components to render. Those components should follow the same props
    * signature : { Helper, SearchResults, SearchState }
    * @param {DOMNode} dom the root dom node in which to look for components
@@ -26,6 +26,7 @@ module.exports = {
     var containersConfig = {};
     containersConfig.indexSelector = ( function( d ) {
       if( d === null ) return undefined;
+
       var options = d.querySelectorAll( "[data-index-name]" );
       var indices = map( options, function( d0 ) {
         return {
@@ -33,6 +34,7 @@ module.exports = {
           index : d0.dataset.indexName
         };
       } );
+
       return {
         node : d,
         indices : indices
@@ -41,10 +43,12 @@ module.exports = {
 
     containersConfig.hitsSelector = ( function( d ) {
       if( d === null ) return undefined;
+
       var options = d.querySelectorAll( "[data-hits-per-page]" );
       var displayOptions = map( options, function( d0 ) {
         return parseInt( d0.dataset.hitsPerPage, 10 );
       } );
+
       return {
         node : d,
         displayOptions : displayOptions
@@ -57,6 +61,15 @@ module.exports = {
         return {
           node : d,
           name : d.dataset.facetName
+        };
+      } );
+
+    containersConfig.tabMenu = map(
+      dom.querySelectorAll( ".algolia-magic-tab-menu" ),
+      function domToBelongsToTabMenu( d ) {
+        return {
+          node : d,
+          name : d.dataset.algoliaFacetName
         };
       } );
 
@@ -82,43 +95,42 @@ module.exports = {
 
     containersConfig.searchBox = ( function domToSearchBox( d ) {
       if( d === null ) return undefined;
-      else {
-        return {
-          node : d,
-          placeholder : d.dataset.placeholder
-        };
-      }
+
+      return {
+        node : d,
+        placeholder : d.dataset.placeholder
+      };
     } )( dom.querySelector( ".algolia-magic.search-box" ) );
 
     containersConfig.results = ( function domToResult( d ) {
       if( d === null ) return undefined;
-      else {
-        return {
-          node : d,
-          hitsPerPage : d.dataset.hitsPerPage || 12,
-          hitTemplate : dom.querySelector( d.dataset.hitTemplate ).innerHTML
-        };
-      }
+
+      var noResSelector = d.dataset.noResultsTemplate;
+      var noResTmplate = noResSelector ? dom.querySelector( noResSelector ).innerHTML : "";
+      return {
+        node : d,
+        hitsPerPage : d.dataset.hitsPerPage || 12,
+        hitTemplate : dom.querySelector( d.dataset.hitTemplate ).innerHTML,
+        noResultsTemplate : noResTmplate 
+      };
     } )( dom.querySelector( ".algolia-magic.result-items" ) );
 
     containersConfig.pagination = ( function domToPagination( d ) {
       if( d === null ) return undefined;
-      else {
-        return {
-          node : d,
-          padding : d.dataset.padding || 2
-        };
-      }
+
+      return {
+        node : d,
+        padding : d.dataset.padding || 2
+      };
     } )( dom.querySelector( ".algolia-magic.pagination" ) );
 
     containersConfig.statistics = ( function domToStats( d ) {
       if( d === null ) return undefined;
-      else {
-        return {
-          node : d,
-          template : dom.querySelector( d.dataset.template ).innerHTML
-        };
-      }
+
+      return {
+        node : d,
+        template : dom.querySelector( d.dataset.template ).innerHTML
+      };
     } )( dom.querySelector( ".algolia-magic.statistics" ) );
 
     return containersConfig;

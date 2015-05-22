@@ -12,10 +12,21 @@ var paginationLabels = {
 class Results extends React.Component {
   render() {
     var results = this.props.results;
-    var renderedResults = map( results.hits, function( r ) {
-      return <Hogan data={ r } key={ r.objectID } template={ this.props.hitTemplate } />;
-    }, this );
-    return <div className="search_list search_results_container row">{ renderedResults }</div>
+    if( !results || !results.hits || results.hits.length === 0 ) {
+      return this.renderNoResults( results, this.props.noResultsTemplate );
+    }
+    return this.renderWithResults( results.hits, this.props.hitTemplate );
+  }
+  renderWithResults( hits, hitTemplate ) {
+    var renderedHits = map( hits, function( hit ) {
+      return <Hogan data={ hit } key={ hit.objectID } template={ hitTemplate } />;
+    } );
+    return <div className="search_list search_results_container row">{ renderedHits }</div>
+  }
+  renderNoResults( results, noResultsTemplate ) {
+    return  <div className="search_list search_results_container row">
+              <Hogan data={ results } template={ noResultsTemplate } />
+            </div>;
   }
 }
 

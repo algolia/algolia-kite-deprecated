@@ -1,0 +1,20 @@
+.algolia-magic-tab-menu {
+  width:100%;
+}
+.algolia-magic-tab-menu--item {
+  font-size: 1.1em;
+  margin-right: 14px;
+  display: inline-block;
+  cursor:pointer;
+}
+.algolia-magic-tab-menu--item__active {
+  font-weight: bold;
+  border-bottom: solid 2px #2897C5;
+  line-height: 24px;
+}
+.algolia-magic-tab-menu--count {
+  padding-left: 4px;
+  font-size: .9em;
+  color: #aaa;
+  font-weight: 400;
+}

@@ -5,6 +5,7 @@
   "main": "index.js",
   "author": "Algolia unicorn factory <hey@algolia.com>",
   "scripts": {
+    "postinstall": "mkdir -p ./dist",
     "build:js": "NODE_ENV=production browserify -d src/index.js | uglifyjs -c warnings=false -m > dist/algoliasearch-ui-kit.min.js && gzip -k -f -9 dist/algoliasearch-ui-kit.min.js",
     "watch:js": "watchify -v -d src/index.js -o dist/algoliasearch-ui-kit.js",
     "serve": "static -z -a 0.0.0.0 ."
@@ -28,6 +29,7 @@
   "dependencies": {
     "algoliasearch": "3.1.x",
     "algoliasearch-helper": "2.0.4",
+    "classnames": "2.1.1",
     "hogan.js": "3.0.2",
     "lodash": "3.5.0",
     "qs": "2.4.2",
