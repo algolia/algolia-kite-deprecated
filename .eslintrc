@@ -22,6 +22,7 @@
     "no-extra-bind" : 1,
     "no-multiple-empty-lines" : 1,
     "no-multi-spaces": 1,
+    "no-else-return": 1,
     "no-spaced-func": 1,
     "no-trailing-spaces" : 2,
     "no-underscore-dangle": 0,
