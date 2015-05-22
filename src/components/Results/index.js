@@ -12,9 +12,10 @@ var paginationLabels = {
 class Results extends React.Component {
   render() {
     var results = this.props.results;
-    return  ( results && results.hits && results.hits.length > 0 ) ?
-              this.renderWithResults( results.hits, this.props.hitTemplate ) :
-              this.renderNoResults( results, this.props.noResultsTemplate );
+    if( !results || !results.hits || results.hits.length === 0 ) {
+      return this.renderNoResults( results, this.props.noResultsTemplate );
+    }
+    return this.renderWithResults( results.hits, this.props.hitTemplate );
   }
   renderWithResults( hits, hitTemplate ) {
     var renderedHits = map( hits, function( hit ) {
