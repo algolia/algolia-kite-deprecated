@@ -1,3 +1,20 @@
+input[type="text"].algolia-magic-search-box--input,
+.algolia-magic-search-box--input {
+  padding: 10px 42px;
+  display: inline-block;
+  border-radius: 20px;
+  border: solid 1px #ccc;
+  background: #FFF;
+}
+input[type="text"].algolia-magic-search-box--input:focus,
+.algolia-magic-search-box--input:focus {
+  border: solid 1px #2897C5;
+  outline: 0;
+  box-shadow: none;
+  background:none;
+}
+
+
 .algolia-magic-tab-menu {
   width:100%;
 }

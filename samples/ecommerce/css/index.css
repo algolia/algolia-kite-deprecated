@@ -63,14 +63,10 @@ a{
   text-align:center;
 }
 
-.search-box {
+.algolia-magic-search-box {
   margin : 0 auto;
   width: 100%;
   max-width : 600px;
-}
-
-.search-box.main{
-  width:100%;
   height: 2.4em;
 }
 
