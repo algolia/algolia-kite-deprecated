@@ -90,6 +90,7 @@ var URLManager = require( "./setup/url.js" );
 
     if( containers.searchBox ) {
       React.render( <SearchBox helper={ h }
+                               inputClass={ containers.searchBox.inputClass }
                                placeholder={ containers.searchBox.placeholder } />,
                     containers.searchBox.node );
     }

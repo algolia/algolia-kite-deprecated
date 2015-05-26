@@ -107,7 +107,8 @@ module.exports = {
 
       return {
         node : d,
-        placeholder : d.dataset.placeholder
+        placeholder : d.dataset.placeholder,
+        inputClass : d.dataset.inputClass
       };
     } )( dom.querySelector( ".algolia-magic.search-box" ) );
 
