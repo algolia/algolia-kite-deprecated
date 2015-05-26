@@ -9,6 +9,15 @@ module.exports = {
    */
   readAlgoliaConfig : function readAlgoliaConfig( dom ) {
     var d = dom.body.dataset;
+
+    var appID = d.algoliaAppId;
+    var key = d.algoliaKey;
+    var index = d.algoliaIndex;
+
+    if( !appID || !key || !index ){
+      throw new Error( "algolia-app-id, algolia-key and algolia-index are mandatory parameters on the body. Check out the GETTING_STARTED.md chapter called 'configure index'." );
+    }
+
     return {
       appID : d.algoliaAppId,
       key : d.algoliaKey,
@@ -106,11 +115,22 @@ module.exports = {
       if( d === null ) return undefined;
 
       var noResSelector = d.dataset.noResultsTemplate;
-      var noResTmplate = noResSelector ? dom.querySelector( noResSelector ).innerHTML : "";
+      var noResTmplate = ( function( sel ){
+        if( !sel ) return "";
+        var templateDom = dom.querySelector( noResSelector );
+        return templateDom ? templateDom.innerHTML : "";
+      } )( noResSelector )
+
+      var hitTemplateSelector = d.dataset.hitTemplate;
+      if( !hitTemplateSelector ) throw new Error(
+        "hit-template is a mandatory field of the results-items component and should be a selector to a valid template" );
+      var hitTemplate = dom.querySelector( hitTemplateSelector );
+      if( !hitTemplate ) throw new Error( "hit-template should be a selector to a valid template" );
+
       return {
         node : d,
-        hitsPerPage : d.dataset.hitsPerPage || 12,
-        hitTemplate : dom.querySelector( d.dataset.hitTemplate ).innerHTML,
+        hitsPerPage : ( d.dataset && d.dataset.hitsPerPage ) || 12,
+        hitTemplate : hitTemplate.innerHTML,
         noResultsTemplate : noResTmplate 
       };
     } )( dom.querySelector( ".algolia-magic.result-items" ) );

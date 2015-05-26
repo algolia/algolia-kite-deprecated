@@ -26,6 +26,11 @@ var URLManager = require( "./setup/url.js" );
   var appConfig = setup.readAlgoliaConfig( document );
   var containers = setup.readContainersConfig( document );
 
+  //check configuration
+  if( !containers || !containers.results ) {
+    throw new Error( "The result-items containers must be defined in order to correctly initialize the UI-kit. Please check GETTING-STARTED.md chapter called 'The search results'" );
+  }
+
   var result = {};
   var state = {};
 
