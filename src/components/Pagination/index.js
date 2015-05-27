@@ -36,7 +36,7 @@ class Pagination extends React.Component {
                            helper={ this.props.helper } page={ page } />;
   }
   nextPageLink( pager ) {
-    var page = pager.isLastPage() ? undefined : pager.currentPage - 1;
+    var page = pager.isLastPage() ? undefined : pager.currentPage + 1;
     return <PaginationLink href="#" label={ this.props.labels.next } ariaLabel="Next"
                            helper={ this.props.helper } page={ page } />
   }
