@@ -139,9 +139,25 @@ module.exports = {
     containersConfig.pagination = ( function domToPagination( d ) {
       if( d === null ) return undefined;
 
+      var labels = ( function() {
+        var next = d.dataset.labelNext;
+        var previous = d.dataset.labelPrevious;
+        var last = d.dataset.labelLast;
+        var first = d.dataset.labelFirst;
+
+        if( next || previous || last || first ) {
+          return {
+            next : next, previous : previous, last : last, first : first
+          };
+        }
+
+        return undefined;
+      } )();
+
       return {
         node : d,
-        padding : d.dataset.padding || 2
+        padding : d.dataset.padding || 2,
+        labels : labels
       };
     } )( dom.querySelector( ".algolia-magic.pagination" ) );
 
