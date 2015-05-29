@@ -110,7 +110,7 @@ module.exports = {
         placeholder : d.dataset.placeholder,
         inputClass : d.dataset.inputClass
       };
-    } )( dom.querySelector( ".algolia-magic.search-box" ) );
+    } )( dom.querySelector( ".algolia-magic-search-box" ) );
 
     containersConfig.results = ( function domToResult( d ) {
       if( d === null ) return undefined;
