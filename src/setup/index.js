@@ -69,7 +69,8 @@ module.exports = {
       function domToSlider( d ) {
         return {
           node : d,
-          name : d.dataset.facetName
+          name : d.dataset.facetName,
+          titleLabel : d.dataset.titleLabel
         };
       } );
 
@@ -88,7 +89,8 @@ module.exports = {
         return {
           node : d,
           name : d.dataset.facetName,
-          sort : d.dataset.sort
+          sort : d.dataset.sort,
+          titleLabel : d.dataset.titleLabel
         };
       } );
 
@@ -98,7 +100,8 @@ module.exports = {
         return {
           node : d,
           name : d.dataset.facetName,
-          sort : d.dataset.sort
+          sort : d.dataset.sort,
+          titleLabel : d.dataset.titleLabel
         };
       } );
 

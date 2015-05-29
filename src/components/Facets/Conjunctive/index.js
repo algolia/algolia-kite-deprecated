@@ -8,8 +8,9 @@ var Facet = React.createClass( {
     var facet = this.props.facet;
     var helper = this.props.helper;
     var sort = this.props.sort;
+    var titleLabel = this.titleLabel || facet.name;
 
-    var title = <h2 className="panel-title">{ facet.name }</h2>;
+    var title = <h2 className="panel-title">{ titleLabel }</h2>;
 
     var facetValues = map( facet.data, function( nb, facetFilter ) {
       return {
