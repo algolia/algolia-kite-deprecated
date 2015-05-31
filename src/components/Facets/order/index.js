@@ -3,15 +3,22 @@ var order = {
     return facetValueA.name.localeCompare( facetValueB.name );
   },
   lexicographicWithSelectedFirst : function( facetValueA, facetValueB ){
-    if( facetValueB.isRefined === facetValueA.isRefined ){
+    if( facetValueB.isRefined === facetValueA.isRefined ) {
       return order.lexicographic( facetValueA, facetValueB );
     }
-    if( facetValueA.isRefined ){
-      return -1;
+    return facetValueA.isRefined ? -1 : 1;
+  },
+  count : function( facetValueA, facetValueB ) {
+    if( facetValueA.value === facetValueB.value ) {
+      return 0;
     }
-    else {
-      return 1;
+    return facetValueA.value > facetValueB.value ? -1 : 1;
+  },
+  countWithSelectedFirst : function( facetValueA, facetValueB ) {
+    if( facetValueB.isRefined === facetValueA.isRefined ) {
+      return order.count( facetValueA, facetValueB );
     }
+    return facetValueA.isRefined ? -1 : 1;
   }
 };
 
