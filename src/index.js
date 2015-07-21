@@ -98,7 +98,8 @@ var URLManager = require( "./setup/url.js" );
     if( containers.pagination ) {
       React.render( <Pagination results={ r }
                                 helper={ h }
-                                padding={ containers.pagination.padding} />,
+                                padding={ containers.pagination.padding}
+                                labels={ containers.pagination.labels } />,
                     containers.pagination.node );
     }
 
