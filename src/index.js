@@ -136,6 +136,7 @@ var URLManager = require( "./setup/url.js" );
       React.render( <ConjunctiveF searchState={ s }
                                   facet={ getFacetOrDefaults( r, f.name ) }
                                   helper={ h }
+                                  titleLabel={ f.titleLabel }
                                   sort={ f.sort } />,
                     f.node );
     } );
@@ -143,6 +144,7 @@ var URLManager = require( "./setup/url.js" );
     forEach( containers.disjunctiveFacets, function( f ) {
       React.render( <DisjunctiveF searchState={ s }
                                   facet={ getFacetOrDefaults( r, f.name ) }
+                                  titleLabel={ f.titleLabel }
                                   helper={ h }
                                   sort={ f.sort } />,
                     f.node );
@@ -151,6 +153,7 @@ var URLManager = require( "./setup/url.js" );
     forEach( containers.sliders, function( slider ) {
       React.render( <Slider searchState={ s }
                             facet={ getFacetOrDefaults( r, slider.name ) }
+                            titleLabel={ slider.titleLabel }
                             helper={ h } />,
                     slider.node );
     } );
