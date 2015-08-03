@@ -4,11 +4,6 @@ var map = require( "lodash/collection/map" );
 
 var Hogan = require( "../Hogan" );
 
-var paginationLabels = {
-  next : "next",
-  previous : "previous"
-};
-
 class Results extends React.Component {
   render() {
     var results = this.props.results;
