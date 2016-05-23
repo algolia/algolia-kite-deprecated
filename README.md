@@ -1,10 +1,11 @@
+ > **Thanks for your interest in this project. We decided that the approach used in `algolia-ui-kit` (html markup based with magic) is not the best suited for our users, therefore we created       [instantsearch.js](https://github.com/algolia/instantsearch.js). Let us know if you like the new project.**
+
 Algolia Kite (name not final)
 =============================
 
 Algolia UI-kit Kite is a UI framework to build in minutes a fresh user experience.
 
-IT IS NOT PRODUCTION READY, you've been warned. Nonetheless you can help us building
-it by giving your inputs or even propose a PR :)
+This project is NOT FOR PROD and also not maintained anymore :) Have a look at [instantsearch.js](https://github.com/algolia/instantsearch.js) if you want javascript widgets for Algolia.
 
 What is the algolia UI-kit?
 ---------------------------
