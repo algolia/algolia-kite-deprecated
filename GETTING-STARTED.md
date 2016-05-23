@@ -97,7 +97,7 @@ The search box is defined with a div element with the classes "algolia-magic" an
 value indicating to your user what they should search for.
 
 ```html
-<div class="algolia-magic search-box" data-placeholder="Search for products!"></div>
+<div class="algolia-magic-search-box" data-placeholder="Search for products!"></div>
 ```
 
 ## Pagination
