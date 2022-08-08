@@ -1,6 +1,17 @@
- > **Thanks for your interest in this project. We decided that the approach used in `algolia-ui-kit` (html markup based with magic) is not the best suited for our users, therefore we created       [instantsearch.js](https://github.com/algolia/instantsearch.js). Let us know if you like the new project.**
+ > Thanks for your interest in this project. We decided that the approach used in `algolia-ui-kit` (html markup based with magic) is not the best suited for our users, therefore we created       [instantsearch.js](https://github.com/algolia/instantsearch.js). Let us know if you like the new project.
+ 
+ 
+UI Design Kit (Figma)
+---------------------------
+You've been looking the the UI Design Kit (Figma) and landed on this page, just follow this link to get back on the right track.
+https://www.algolia.com/doc/guides/building-search-ui/resources/ui-kit/js/
+ 
+![image](https://user-images.githubusercontent.com/1101220/183423931-57e27b89-26b7-4e56-9590-dafc50e01695.png)
 
-Algolia Kite (name not final)
+
+
+
+DEPRECATED - Algolia Kite
 =============================
 
 Algolia UI-kit Kite is a UI framework to build in minutes a fresh user experience.
